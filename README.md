@@ -11,20 +11,20 @@ Cilj:
 
 ---
 
-# Priprava projekta (enkrat na začetku)
+# 1. Priprava projekta (enkrat na začetku)
 
-## 1. Kloniranje repozitorija
+## Kloniranje repozitorija
 git clone <URL-repozitorija>
 ## Odpri projekt v VS Code
 - File → Open Folder
 
 ## Posodobi main vejo
-git checkout main
-git pull
+- git checkout main
+- git pull
 
 ---
 
-#2.  Pravilo: delo v vejah (BRANCHES)
+# 2.  Pravilo: delo v vejah (BRANCHES)
 
 ❗ Nikoli ne delamo direktno na `main`.
 
@@ -68,7 +68,7 @@ git commit -m "Opis spremembe"
 ---
 
 # 5. Push na GitHub
-git push origin task1-ime
+- git push origin task1-ime
 ---
 
 # 6. Pull Request (PR)
@@ -107,6 +107,6 @@ Po merge:
 ---
 
 # 9. Naslednji task
-git checkout main
-git pull
-git checkout -b task2-ime
+- git checkout main
+- git pull
+- git checkout -b task2-ime
