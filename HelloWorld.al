@@ -6,10 +6,10 @@ namespace DefaultPublisher.bcseminarskaekipa1;
 
 using Microsoft.Sales.Customer;
 
-pageextension 50100 CustomerListExt extends "Customer List"
+pageextension 50110 CustomerListExt extends "Customer List"
 {
-    // trigger OnOpenPage();
-    // begin
-    //     Message('App published: Hello world');
-    // end;
+    trigger OnOpenPage();
+    begin
+        Message('I am lorem therefore i ipsum');
+    end;
 }
