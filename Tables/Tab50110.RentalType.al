@@ -1,4 +1,4 @@
-table 50100 "Rental Type"
+table 50110 "Rental Type"
 {
     Caption = 'Rental Type';
     DataClassification = ToBeClassified;
@@ -34,7 +34,8 @@ table 50100 "Rental Type"
             trigger OnValidate()
             begin
                 if "Requires Deposit" = true then
-                    #dodaj requirement
+                    if "Deposit Amount" <= 0 then
+                        Error('Deposit amount must be greater than 0 if a deposit is required');
             end;
         }
     }
