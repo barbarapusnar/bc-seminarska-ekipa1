@@ -6,7 +6,7 @@ page 50113 BicycleCard
     Caption = 'BicycleCard';
     PageType = Card;
     SourceTable = Bicycle;
-    
+
     layout
     {
         area(Content)
@@ -14,23 +14,30 @@ page 50113 BicycleCard
             group(General)
             {
                 Caption = 'General';
-                
-                field("Current Location"; Rec."Current Location")
-                {
-                    ToolTip = 'Specifies the value of the Current Location field.', Comment = '%';
-                }
-                field(Description; Rec.Description)
-                {
-                    ToolTip = 'Specifies the value of the Description field.', Comment = '%';
-                }
-                field("Last Service Date"; Rec."Last Service Date")
-                {
-                    ToolTip = 'Specifies the value of the Last Service Date field.', Comment = '%';
-                }
+
                 field("No."; Rec."No.")
                 {
                     ToolTip = 'Specifies the value of the No. field.', Comment = '%';
                 }
+                field("Rental Type Code"; Rec."Rental Type Code")
+                {
+                    ToolTip = 'Specifies the value of the Rental Type Code field.', Comment = '%';
+                }
+
+                field(Description; Rec.Description)
+                {
+                    ToolTip = 'Specifies the value of the Description field.', Comment = '%';
+                }
+
+                field(Status; Rec.Status)
+                {
+                    ToolTip = 'Specifies the value of the Status field.', Comment = '%';
+                }
+            }
+            group(Purchase)
+            {
+                Caption = 'Purchase';
+
                 field("Purchase Date"; Rec."Purchase Date")
                 {
                     ToolTip = 'Specifies the value of the Purchase Date field.', Comment = '%';
@@ -39,13 +46,17 @@ page 50113 BicycleCard
                 {
                     ToolTip = 'Specifies the value of the Purchase Price field.', Comment = '%';
                 }
-                field("Rental Type Code"; Rec."Rental Type Code")
+            }
+            group(LocationService)
+            {
+                Caption = 'Location & Service';
+                field("Current Location"; Rec."Current Location")
                 {
-                    ToolTip = 'Specifies the value of the Rental Type Code field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Current Location field.', Comment = '%';
                 }
-                field(Status; Rec.Status)
+                field("Last Service Date"; Rec."Last Service Date")
                 {
-                    ToolTip = 'Specifies the value of the Status field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Last Service Date field.', Comment = '%';
                 }
             }
         }
