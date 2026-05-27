@@ -23,7 +23,7 @@ table 50113 RentalLine
             begin
                 if Bike.Get("Bicycle No.") then begin
                     if Bike.Status <> Bike.Status::Available then
-                        Error('ojoj 😱');
+                        Error('Bicycle is not available');
                     Description := Bike.Description;
                 end
             end;

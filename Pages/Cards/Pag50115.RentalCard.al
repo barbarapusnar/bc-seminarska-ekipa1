@@ -7,6 +7,8 @@ page 50115 RentalCard
     PageType = Card;
     SourceTable = RentalHeader;
 
+
+
     layout
     {
         area(Content)
@@ -47,6 +49,37 @@ page 50115 RentalCard
             part(Lines; RentalLineSubpage)
             {
                 SubPageLink = "Rental No." = FIELD("No.");
+            }
+        }
+    }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(StartRental)
+            {
+                Caption = 'Start Rental';
+                Image = Start;
+
+                trigger OnAction()
+                var
+                    RentalManagement: Codeunit "Rental Management";
+                begin
+                    RentalManagement.StartRental(Rec);
+                end;
+            }
+            action(ProcessReturn)
+            {
+                Caption = 'Process Return';
+                Image = Return;
+
+                trigger OnAction()
+                var
+                    RentalManagement: Codeunit "Rental Management";
+                begin
+                    RentalManagement.ProcessReturn(Rec);
+                end;
             }
         }
     }
