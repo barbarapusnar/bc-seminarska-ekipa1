@@ -44,6 +44,10 @@ page 50115 RentalCard
                     ToolTip = 'Specifies the value of the Total Amount field.', Comment = '%';
                 }
             }
+            part(Lines; RentalLineSubpage)
+            {
+                SubPageLink = "Rental No." = FIELD("No.");
+            }
         }
     }
 }
