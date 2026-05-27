@@ -32,4 +32,24 @@ page 50115 "Rental Card"
             }
         }
     }
+    actions
+    {
+        area(Processing)
+        {
+            action(StartRental)
+            {
+                Caption = 'Start Rental';
+                ApplicationArea = All;
+                Enabled = Rec.Status = Rec.Status::Open;
+
+                trigger OnAction()
+                var
+                    RentalMgmt: Codeunit "Rental Management";
+                begin
+                    RentalMgmt.ProcessReturn(Rec);
+                    CurrPage.Update();
+                end;
+            }
+        }
+    }
 }
