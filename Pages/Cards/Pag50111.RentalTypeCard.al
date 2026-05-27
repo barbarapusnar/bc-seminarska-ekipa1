@@ -3,7 +3,7 @@ namespace bcseminarskaekipa.bcseminarskaekipa;
 page 50111 RentalTypeCard
 {
     ApplicationArea = All;
-    Caption = 'RentalTypeCard';
+    Caption = 'Rental Type Card';
     PageType = Card;
     SourceTable = "Rental Type";
 

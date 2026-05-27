@@ -3,7 +3,7 @@ namespace bcseminarskaekipa.bcseminarskaekipa;
 page 50113 BicycleCard
 {
     ApplicationArea = All;
-    Caption = 'BicycleCard';
+    Caption = 'Bicycle Card';
     PageType = Card;
     SourceTable = Bicycle;
 
