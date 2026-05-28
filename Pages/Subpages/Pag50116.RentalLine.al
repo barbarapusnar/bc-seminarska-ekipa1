@@ -1,6 +1,6 @@
 namespace bcseminarskaekipa.bcseminarskaekipa;
 
-page 50101 RentalLine
+page 50116 RentalLine
 {
     ApplicationArea = All;
     Caption = 'Rental Line Subpage';
