@@ -3,7 +3,7 @@ namespace bcseminarskaekipa.bcseminarskaekipa;
 page 50110 RentalTypeList
 {
     ApplicationArea = All;
-    Caption = 'RentalTypeList';
+    Caption = 'Rental Type List';
     PageType = List;
     SourceTable = "Rental Type";
     UsageCategory = Lists;

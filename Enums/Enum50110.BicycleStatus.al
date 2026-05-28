@@ -3,7 +3,7 @@ namespace bcseminarskaekipa.bcseminarskaekipa;
 enum 50110 "Bicycle Status"
 {
     Extensible = true;
-    
+
     value(0; Available)
     {
         Caption = 'Na voljo';

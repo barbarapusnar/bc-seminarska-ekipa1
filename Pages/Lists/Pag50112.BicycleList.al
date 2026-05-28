@@ -3,7 +3,7 @@ namespace bcseminarskaekipa.bcseminarskaekipa;
 page 50112 BicycleList
 {
     ApplicationArea = All;
-    Caption = 'BicycleList';
+    Caption = 'Bicycle List';
     PageType = List;
     SourceTable = Bicycle;
     UsageCategory = Lists;

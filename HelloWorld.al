@@ -8,8 +8,8 @@ using Microsoft.Sales.Customer;
 
 pageextension 50110 CustomerListExt extends "Customer List"
 {
-    trigger OnOpenPage();
-    begin
-        Message('I am lorem therefore i ipsum');
-    end;
+    // trigger OnOpenPage();
+    // begin
+    //     Message('I am lorem therefore i ipsum');
+    // end;
 }
