@@ -1,4 +1,4 @@
-table 50112 "Rental Header"
+table 50112 "RentalHeader"
 {
     Caption = 'Rental Header';
     DataClassification = ToBeClassified;
@@ -44,7 +44,7 @@ table 50112 "Rental Header"
         {
             Caption = 'Total Amount';
             FieldClass = FlowField;
-            CalcFormula = Sum("Rental Line"."Line Amount"
+            CalcFormula = Sum("RentalLine"."Line Amount"
                     WHERE("Rental No." = FIELD("No.")));
             Editable = false;
         }

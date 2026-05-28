@@ -1,4 +1,4 @@
-query 50130 "Active Rentals Analysis"
+query 50110 "ActiveRentalsAnalysis"
 {
     Caption = 'Active Rentals Analysis';
     QueryType = Normal;
@@ -6,7 +6,7 @@ query 50130 "Active Rentals Analysis"
 
     elements
     {
-        dataitem(RentalHeader; "Rental Header")
+        dataitem(RentalHeader; "RentalHeader")
         {
             DataItemTableFilter = Status = CONST(Active);
 
@@ -30,7 +30,7 @@ query 50130 "Active Rentals Analysis"
                 {
                 }
 
-                dataitem(RentalLine; "Rental Line")
+                dataitem(RentalLine; "RentalLine")
                 {
                     DataItemLink = "Rental No." = RentalHeader."No.";
 

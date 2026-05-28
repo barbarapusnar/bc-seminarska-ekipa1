@@ -5,7 +5,7 @@ page 50116 RentalLine
     ApplicationArea = All;
     Caption = 'Rental Line Subpage';
     PageType = ListPart;
-    SourceTable = "Rental Line";
+    SourceTable = "RentalLine";
 
     layout
     {

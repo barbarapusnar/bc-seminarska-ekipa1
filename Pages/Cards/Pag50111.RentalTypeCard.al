@@ -5,7 +5,7 @@ page 50111 RentalTypeCard
     ApplicationArea = All;
     Caption = 'Rental Type Card';
     PageType = Card;
-    SourceTable = "Rental Type";
+    SourceTable = "RentalType";
 
     layout
     {

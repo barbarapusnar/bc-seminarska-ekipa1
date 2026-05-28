@@ -1,11 +1,11 @@
-report 50140 "Rental report"
+report 50110 "RentalReport"
 {
     Caption = 'Rental report';
 
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
 
-    DefaultRenderingLayout =WordLayout;
+    DefaultRenderingLayout = WordLayout;
 
     dataset
     {
@@ -14,7 +14,10 @@ report 50140 "Rental report"
             column(CustomerNo; "No.") { }
             column(CustomerName; Name) { }
 
-            dataitem(RentalHeader; "Rental Header")
+            column(TodayDate; Today) { }
+            column(CompanyName; CompanyName) { }
+
+            dataitem(RentalHeader; "RentalHeader")
             {
                 DataItemLink = "Customer No." = FIELD("No.");
 
@@ -24,7 +27,7 @@ report 50140 "Rental report"
                 column(ActualReturnDate; "Actual Return Date") { }
                 column(Status; Status) { }
 
-                dataitem(RentalLine; "Rental Line")
+                dataitem(RentalLine; "RentalLine")
                 {
                     DataItemLink = "Rental No." = FIELD("No.");
 
