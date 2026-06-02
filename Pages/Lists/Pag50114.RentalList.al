@@ -59,4 +59,21 @@ page 50114 RentalList
             }
         }
     }
+    actions
+    {
+        area(Processing)
+        {
+            action(PrintRentalReport)
+            {
+                Caption = 'Izpis izposoj';
+                ApplicationArea = All;
+                Image = Report;
+
+                trigger OnAction()
+                begin
+                    Report.Run(50110);
+                end;
+            }
+        }
+    }
 }
