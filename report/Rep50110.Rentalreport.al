@@ -38,6 +38,16 @@ report 50110 "RentalReport"
                     column(LineAmount; "Line Amount") { }
                 }
             }
+                trigger OnAfterGetRecord()
+        var
+            RentalHeaderRec: Record "RentalHeader";
+        begin
+            RentalHeaderRec.SetRange("Customer No.", "No.");
+            RentalHeaderRec.SetRange(Status, RentalHeaderRec.Status::Active);
+
+            if RentalHeaderRec.IsEmpty() then
+               CurrReport.Skip();
+        end;
         }
     }
 
