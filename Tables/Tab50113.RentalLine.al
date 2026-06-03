@@ -1,4 +1,4 @@
-table 50113 "Rental Line"
+table 50113 "RentalLine"
 {
     Caption = 'Rental Line';
     DataClassification = ToBeClassified;
@@ -8,7 +8,7 @@ table 50113 "Rental Line"
         field(1; "Rental No."; Code[20])
         {
             Caption = 'Rental No.';
-            TableRelation = "Rental Header"."No.";
+            TableRelation = "RentalHeader"."No.";
         }
         field(2; "Line No."; Integer)
         {

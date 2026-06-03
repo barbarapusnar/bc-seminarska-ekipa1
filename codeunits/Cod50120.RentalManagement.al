@@ -1,10 +1,10 @@
 namespace bcseminarskaekipa.bcseminarskaekipa;
 
-codeunit 50120 "Rental Management"
+codeunit 50120 "RentalManagement"
 {
-    procedure StartRental(var RentalHeader: Record "Rental Header")
+    procedure StartRental(var RentalHeader: Record "RentalHeader")
     var
-        RentalLine: Record "Rental Line";
+        RentalLine: Record "RentalLine";
         Bicycle: Record Bicycle;
     begin
         // Preveri status
@@ -45,9 +45,9 @@ codeunit 50120 "Rental Management"
         Message('Rental started successfully.');
     end;
 
-    procedure ProcessReturn(var RentalHeader: Record "Rental Header")
+    procedure ProcessReturn(var RentalHeader: Record "RentalHeader")
     var
-        RentalLine: Record "Rental Line";
+        RentalLine: Record "RentalLine";
         Bicycle: Record Bicycle;
     begin
         // Preveri status

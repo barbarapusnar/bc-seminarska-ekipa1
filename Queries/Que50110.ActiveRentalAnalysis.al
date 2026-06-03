@@ -1,34 +1,61 @@
 namespace bcseminarskaekipa.bcseminarskaekipa;
-
+using Microsoft.Sales.Customer;
 query 50110 ActiveRentalAnalysis
 {
-    Caption = 'Active Rental Analysis';
+    Caption = 'Active Rentals Analysis';
     QueryType = Normal;
+    UsageCategory = ReportsAndAnalysis;
 
     elements
     {
-        dataitem(RentalHeader; "Rental Header")
+        dataitem(RentalHeader; "RentalHeader")
         {
-            DataItemTableFilter = Status = const(Active);
+            DataItemTableFilter = Status = CONST(Active);
 
-            column(Rental_No; "No.") { }
-            column(Customer_No; "Customer No.") { }
-            column(Status; Status) { }
-
-            dataitem(RentalLine; "Rental Line")
+            column(RentalNo; "No.")
             {
-                DataItemLink = "Rental No." = RentalHeader."No.";
+            }
 
-                column(Bicycle_No; "Bicycle No.") { }
-                column(Description; Description) { }
-                column(Rental_Days; "Rental Days") { }
-                column(Line_Amount; "Line Amount") { }
+            column(RentalStatus; Status)
+            {
+            }
 
-                dataitem(Bicycle; Bicycle)
+            column(CustomerNo; "Customer No.")
+            {
+            }
+
+            dataitem(Customer; Customer)
+            {
+                DataItemLink = "No." = RentalHeader."Customer No.";
+
+                column(CustomerName; Name)
                 {
-                    DataItemLink = "No." = RentalLine."Bicycle No.";
+                }
 
-                    column(Bicycle_Description; Description) { }
+                dataitem(RentalLine; "RentalLine")
+                {
+                    DataItemLink = "Rental No." = RentalHeader."No.";
+
+                    column(BicycleNo; "Bicycle No.")
+                    {
+                    }
+
+                    column(RentalDays; "Rental Days")
+                    {
+                    }
+
+                    column(LineAmount; "Line Amount")
+                    {
+                    }
+
+                    dataitem(Bicycle; Bicycle)
+                    {
+                        DataItemLink = "No." = RentalLine."Bicycle No.";
+
+                        column(BicycleDescription; Description)
+                        {
+                        }
+                    }
                 }
             }
         }

@@ -5,7 +5,7 @@ page 50114 RentalList
     ApplicationArea = All;
     Caption = 'Rental List';
     PageType = List;
-    SourceTable = "Rental Header";
+    SourceTable = "RentalHeader";
     UsageCategory = Lists;
     CardPageId = RentalCard;
 
@@ -56,23 +56,6 @@ page 50114 RentalList
                     ApplicationArea = All;
                     ToolTip = 'Specifies the total rental amount.';
                 }
-            }
-        }
-    }
-    actions
-    {
-        area(Processing)
-        {
-            action(PrintRentalReport)
-            {
-                Caption = 'Izpis izposoj';
-                ApplicationArea = All;
-                Image = Report;
-
-                trigger OnAction()
-                begin
-                    Report.Run(50110);
-                end;
             }
         }
     }

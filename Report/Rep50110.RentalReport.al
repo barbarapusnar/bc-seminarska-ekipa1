@@ -4,41 +4,63 @@ using Microsoft.Sales.Customer;
 
 report 50110 RentalReport
 {
-    Caption = 'Pregled izposoj po strankah';
+    Caption = 'Rental report';
+
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
-
-    DefaultLayout = Word;
-    WordLayout = 'RentalReport.docx';
+    WordMergeDataItem = Customer;
+    DefaultRenderingLayout = WordLayout;
 
     dataset
     {
         dataitem(Customer; Customer)
         {
-            column(Customer_No; "No.") { }
-            column(Customer_Name; Name) { }
+            column(CustomerNo; "No.") { }
+            column(CustomerName; Name) { }
 
-            dataitem(RentalHeader; "Rental Header")
+            column(TodayDate; Today) { }
+            column(CompanyName; CompanyName) { }
+            dataitem(RentalHeader; "RentalHeader")
             {
-                DataItemLink = "Customer No." = field("No.");
+                DataItemLink = "Customer No." = FIELD("No.");
+                DataItemTableView = where(Status = const(Active));
 
-                column(Rental_No; "No.") { }
-                column(Rental_Date; "Rental Date") { }
-                column(Expected_Return_Date; "Expected Return Date") { }
-                column(Actual_Return_Date; "Actual Return Date") { }
+                column(RentalNo; "No.") { }
+                column(RentalDate; "Rental Date") { }
+                column(ExpectedReturnDate; "Expected Return Date") { }
+                column(ActualReturnDate; "Actual Return Date") { }
                 column(Status; Status) { }
 
-                dataitem(RentalLine; "Rental Line")
+                dataitem(RentalLine; "RentalLine")
                 {
-                    DataItemLink = "Rental No." = field("No.");
+                    DataItemLink = "Rental No." = FIELD("No.");
 
-                    column(Bicycle_No; "Bicycle No.") { }
+                    column(BicycleNo; "Bicycle No.") { }
                     column(Description; Description) { }
-                    column(Rental_Days; "Rental Days") { }
-                    column(Daily_Rate; "Daily Rate") { }
-                    column(Line_Amount; "Line Amount") { }
+                    column(RentalDays; "Rental Days") { }
+                    column(DailyRate; "Daily Rate") { }
+                    column(LineAmount; "Line Amount") { }
                 }
             }
+            trigger OnAfterGetRecord()
+            var
+                RentalHeaderRec: Record "RentalHeader";
+            begin
+                RentalHeaderRec.SetRange("Customer No.", "No.");
+                RentalHeaderRec.SetRange(Status, RentalHeaderRec.Status::Active);
+
+                if RentalHeaderRec.IsEmpty() then
+                    CurrReport.Skip();
+            end;
+        }
+    }
+
+    rendering
+    {
+        layout(WordLayout)
+        {
+            Type = Word;
+            LayoutFile = 'Layouts/RentalOverview.docx';
         }
     }
 }
