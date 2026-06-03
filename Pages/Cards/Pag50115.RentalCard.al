@@ -5,7 +5,7 @@ page 50115 RentalCard
     ApplicationArea = All;
     Caption = 'Rental Card';
     PageType = Card;
-    SourceTable = "Rental Header";
+    SourceTable = "RentalHeader";
 
     layout
     {
@@ -77,7 +77,7 @@ page 50115 RentalCard
 
                 trigger OnAction()
                 var
-                    RentalManagement: Codeunit "Rental Management";
+                    RentalManagement: Codeunit "RentalManagement";
                 begin
                     RentalManagement.StartRental(Rec);
                 end;
@@ -91,7 +91,7 @@ page 50115 RentalCard
 
                 trigger OnAction()
                 var
-                    RentalManagement: Codeunit "Rental Management";
+                    RentalManagement: Codeunit "RentalManagement";
                 begin
                     RentalManagement.ProcessReturn(Rec);
                 end;

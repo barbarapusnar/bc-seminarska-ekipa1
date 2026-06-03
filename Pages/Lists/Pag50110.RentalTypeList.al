@@ -5,7 +5,7 @@ page 50110 RentalTypeList
     ApplicationArea = All;
     Caption = 'Rental Type List';
     PageType = List;
-    SourceTable = "Rental Type";
+    SourceTable = "RentalType";
     UsageCategory = Lists;
     CardPageId = RentalTypeCard;
 

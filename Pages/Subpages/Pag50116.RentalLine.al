@@ -1,11 +1,11 @@
 namespace bcseminarskaekipa.bcseminarskaekipa;
 
-page 50101 RentalLine
+page 50116 RentalLine
 {
     ApplicationArea = All;
     Caption = 'Rental Line Subpage';
     PageType = ListPart;
-    SourceTable = "Rental Line";
+    SourceTable = "RentalLine";
 
     layout
     {
@@ -29,6 +29,14 @@ page 50101 RentalLine
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the bicycle number.';
+                        trigger OnValidate()
+                            var
+                                Bicycle: Record Bicycle;
+                            begin
+                                     if Bicycle.Get(Rec."Bicycle No.") then begin
+                                     Rec.Description := Bicycle.Description;                                   
+                            end;
+                        end;
                 }
 
                 field(Description; Rec.Description)
