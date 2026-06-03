@@ -4,7 +4,7 @@ report 50110 "RentalReport"
 
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
-
+    WordMergeDataItem=Customer;
     DefaultRenderingLayout = WordLayout;
 
     dataset
@@ -15,11 +15,11 @@ report 50110 "RentalReport"
             column(CustomerName; Name) { }
 
             column(TodayDate; Today) { }
-            column(CompanyName; CompanyName) { }
-
+            column(CompanyName; CompanyName) { }      
             dataitem(RentalHeader; "RentalHeader")
             {
                 DataItemLink = "Customer No." = FIELD("No.");
+                DataItemTableView = where(Status = const(Active));
 
                 column(RentalNo; "No.") { }
                 column(RentalDate; "Rental Date") { }
