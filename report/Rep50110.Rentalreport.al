@@ -4,7 +4,7 @@ report 50110 "RentalReport"
 
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
-    WordMergeDataItem=Customer;
+    WordMergeDataItem = Customer;
     DefaultRenderingLayout = WordLayout;
 
     dataset
@@ -15,7 +15,7 @@ report 50110 "RentalReport"
             column(CustomerName; Name) { }
 
             column(TodayDate; Today) { }
-            column(CompanyName; CompanyName) { }      
+            column(CompanyName; CompanyName) { }
             dataitem(RentalHeader; "RentalHeader")
             {
                 DataItemLink = "Customer No." = FIELD("No.");
@@ -38,16 +38,16 @@ report 50110 "RentalReport"
                     column(LineAmount; "Line Amount") { }
                 }
             }
-                trigger OnAfterGetRecord()
-        var
-            RentalHeaderRec: Record "RentalHeader";
-        begin
-            RentalHeaderRec.SetRange("Customer No.", "No.");
-            RentalHeaderRec.SetRange(Status, RentalHeaderRec.Status::Active);
+            trigger OnAfterGetRecord()
+            var
+                RentalHeaderRec: Record "RentalHeader";
+            begin
+                RentalHeaderRec.SetRange("Customer No.", "No.");
+                RentalHeaderRec.SetRange(Status, RentalHeaderRec.Status::Active);
 
-            if RentalHeaderRec.IsEmpty() then
-               CurrReport.Skip();
-        end;
+                if RentalHeaderRec.IsEmpty() then
+                    CurrReport.Skip();
+            end;
         }
     }
 
