@@ -6,6 +6,7 @@ page 50117 RentalPriceList
     PageType = List;
     SourceTable = RentalPriceList;
     ApplicationArea = All;
+    UsageCategory = Lists;
     CardPageID = RentalPriceCard;
 
     layout
@@ -38,20 +39,6 @@ page 50117 RentalPriceList
                 {
                     ApplicationArea = All;
                 }
-            }
-        }
-    }
-
-    actions
-    {
-        area(Navigation)
-        {
-            action(OpenCard)
-            {
-                Caption = 'Open Card';
-                ApplicationArea = All;
-                Image = EditLines;
-                RunObject = page RentalPriceCard;
             }
         }
     }
