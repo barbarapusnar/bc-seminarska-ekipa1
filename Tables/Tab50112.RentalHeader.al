@@ -13,10 +13,33 @@ table 50112 "RentalHeader"
         {
             Caption = 'Customer No.';
             TableRelation = Customer."No.";
+
             trigger OnValidate()
+            var
+                CustomerRec: Record Customer;
+                RentalHeaderRec: Record "RentalHeader";
+                ActiveRentals: Integer;
             begin
                 if "Customer No." = '' then
                     Error('Customer No. ne sme biti prazen');
+
+                if not CustomerRec.Get("Customer No.") then
+                    Error('Stranka ne obstaja.');
+
+                // šteje samo ACTIVE izposoje
+                RentalHeaderRec.Reset();
+                RentalHeaderRec.SetRange("Customer No.", "Customer No.");
+                RentalHeaderRec.SetRange(Status, RentalHeaderRec.Status::Active);
+
+                ActiveRentals := RentalHeaderRec.Count();
+
+                // če je 0 => neomejeno
+                if (CustomerRec."Max Active Rentals" > 0) and
+                   (ActiveRentals >= CustomerRec."Max Active Rentals")
+                then
+                    Error(
+                        'Stranka je že dosegla maksimalno dovoljeno število aktivnih izposoj.'
+                    );
             end;
         }
         field(3; "Rental Date"; Date)
