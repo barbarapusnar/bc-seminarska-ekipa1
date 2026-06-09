@@ -77,18 +77,27 @@ table 50114 RentalPriceList
         Existing.SetRange(RentalTypeCode, RentalTypeCode);
         Existing.SetFilter(Code, '<>%1', Code);
 
-        if Existing.FindSet() then
-            repeat
-                if (StartingDate <= Existing.EndingDate) and
-                   (EndingDate >= Existing.StartingDate) then
-                    Error('For this Rental Type there is already a price list defined for the selected period.');
-            until Existing.Next() = 0;
+        Existing.SetFilter(
+            StartingDate,
+            '<=%1',
+            EndingDate);
+
+        Existing.SetFilter(
+            EndingDate,
+            '>=%1',
+            StartingDate);
+
+        if Existing.FindFirst() then
+            Error(
+                'For this Rental Type there is already a price list defined for the selected period.');
     end;
 
     procedure FindPrice(RentalType: Code[20]; WorkDate: Date): Decimal
     var
         PriceList: Record RentalPriceList;
     begin
+        PriceList.SetCurrentKey(RentalTypeCode, StartingDate, EndingDate);
+
         PriceList.SetRange(RentalTypeCode, RentalType);
         PriceList.SetFilter(StartingDate, '<=%1', WorkDate);
         PriceList.SetFilter(EndingDate, '>=%1', WorkDate);
