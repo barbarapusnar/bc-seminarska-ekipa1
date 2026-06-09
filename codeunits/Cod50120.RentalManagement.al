@@ -1,4 +1,5 @@
 namespace bcseminarskaekipa.bcseminarskaekipa;
+using Microsoft.Sales.Document;
 
 codeunit 50120 "RentalManagement"
 {
@@ -7,17 +8,14 @@ codeunit 50120 "RentalManagement"
         RentalLine: Record "RentalLine";
         Bicycle: Record Bicycle;
     begin
-        // Preveri status
         if RentalHeader.Status <> RentalHeader.Status::Open then
             Error('Rental must have status Open.');
 
-        // Preveri ali obstajajo vrstice
         RentalLine.SetRange("Rental No.", RentalHeader."No.");
 
         if RentalLine.IsEmpty() then
             Error('Rental must contain at least one line.');
 
-        // Preveri kolesa
         if RentalLine.FindSet() then
             repeat
                 if not Bicycle.Get(RentalLine."Bicycle No.") then
@@ -28,7 +26,6 @@ codeunit 50120 "RentalManagement"
 
             until RentalLine.Next() = 0;
 
-        // Nastavi kolesa na Rented
         if RentalLine.FindSet() then
             repeat
                 Bicycle.Get(RentalLine."Bicycle No.");
@@ -38,7 +35,6 @@ codeunit 50120 "RentalManagement"
 
             until RentalLine.Next() = 0;
 
-        // Posodobi rental
         RentalHeader.Status := RentalHeader.Status::Active;
         RentalHeader.Modify();
 
@@ -50,17 +46,14 @@ codeunit 50120 "RentalManagement"
         RentalLine: Record "RentalLine";
         Bicycle: Record Bicycle;
     begin
-        // Preveri status
         if RentalHeader.Status <> RentalHeader.Status::Active then
             Error('Rental must have status Active.');
 
-        // Preveri vrstice
         RentalLine.SetRange("Rental No.", RentalHeader."No.");
 
         if RentalLine.IsEmpty() then
             Error('Rental must contain at least one line.');
 
-        // Preveri obstoj koles
         if RentalLine.FindSet() then
             repeat
                 if not Bicycle.Get(RentalLine."Bicycle No.") then
@@ -68,7 +61,6 @@ codeunit 50120 "RentalManagement"
 
             until RentalLine.Next() = 0;
 
-        // Nastavi kolesa na Available
         if RentalLine.FindSet() then
             repeat
                 Bicycle.Get(RentalLine."Bicycle No.");
@@ -78,11 +70,64 @@ codeunit 50120 "RentalManagement"
 
             until RentalLine.Next() = 0;
 
-        // Posodobi rental
         RentalHeader."Actual Return Date" := Today;
         RentalHeader.Status := RentalHeader.Status::Returned;
         RentalHeader.Modify();
 
         Message('Rental returned successfully.');
+    end;
+
+    procedure CreateSalesInvoice(var RentalHeader: Record "RentalHeader")
+    var
+        RentalLine: Record "RentalLine";
+        SalesHeader: Record "Sales Header";
+        SalesLine: Record "Sales Line";
+        LineNo: Integer;
+    begin
+        if RentalHeader.Status <> RentalHeader.Status::Returned then
+            Error('Sales invoice can only be created for returned rentals.');
+
+        RentalLine.SetRange("Rental No.", RentalHeader."No.");
+
+        if RentalLine.IsEmpty() then
+            Error('Rental must contain at least one line.');
+
+        // Create Sales Header
+        SalesHeader.Init();
+        SalesHeader."Document Type" := SalesHeader."Document Type"::Invoice;
+        SalesHeader.Insert(true);
+
+        SalesHeader.Validate("Sell-to Customer No.", RentalHeader."Customer No.");
+        SalesHeader.Validate("Document Date", Today);
+        SalesHeader.Modify(true);
+
+        // Create Sales Lines
+        LineNo := 10000;
+
+        if RentalLine.FindSet() then
+            repeat
+                SalesLine.Init();
+                SalesLine."Document Type" := SalesHeader."Document Type";
+                SalesLine."Document No." := SalesHeader."No.";
+                SalesLine."Line No." := LineNo;
+
+                SalesLine.Insert(true);
+
+                SalesLine.Validate(Type, SalesLine.Type::Item);
+                SalesLine.Validate("No.", 'RENTAL');
+
+                SalesLine.Validate(Description, RentalLine.Description);
+                SalesLine.Validate(Quantity, RentalLine."Rental Days");
+                SalesLine.Validate("Unit Price", RentalLine."Daily Rate");
+
+                SalesLine.Modify(true);
+
+                LineNo += 10000;
+
+            until RentalLine.Next() = 0;
+
+        Message(
+            'Sales Invoice %1 created successfully.',
+            SalesHeader."No.");
     end;
 }
