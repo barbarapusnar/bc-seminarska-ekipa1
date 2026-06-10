@@ -65,6 +65,7 @@ page 50115 RentalCard
             }
         }
     }
+
     actions
     {
         area(Processing)
@@ -94,6 +95,20 @@ page 50115 RentalCard
                     RentalManagement: Codeunit "RentalManagement";
                 begin
                     RentalManagement.ProcessReturn(Rec);
+                end;
+            }
+
+            action(CreateSalesInvoice)
+            {
+                ApplicationArea = All;
+                Caption = 'Create Sales Invoice';
+                Image = Invoice;
+
+                trigger OnAction()
+                var
+                    RentalManagement: Codeunit "RentalManagement";
+                begin
+                    RentalManagement.CreateSalesInvoice(Rec);
                 end;
             }
         }
