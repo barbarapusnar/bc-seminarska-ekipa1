@@ -3,16 +3,16 @@ namespace bcseminarskaekipa.bcseminarskaekipa;
 page 50119 BicycleAPI
 {
     PageType = API;
-    SourceTable = Bicycle;
+    Caption = 'Bicycle API';
 
-    APIPublisher = 'mycompany';
+    APIPublisher = 'school';
     APIGroup = 'rental';
     APIVersion = 'v1.0';
 
     EntityName = 'bicycle';
     EntitySetName = 'bicycles';
 
-    DelayedInsert = true;
+    SourceTable = Bicycle;
 
     InsertAllowed = false;
     ModifyAllowed = false;
@@ -20,30 +20,41 @@ page 50119 BicycleAPI
 
     layout
     {
-        area(content)
+        area(Content)
         {
-            repeater(Group)
+            repeater(General)
             {
+                field(id; Rec.SystemId)
+                {
+                    Caption = 'Id';
+                    ApplicationArea = All;
+                }
+
                 field(no; Rec."No.")
                 {
                     Caption = 'No.';
+                    ApplicationArea = All;
                 }
 
                 field(description; Rec.Description)
                 {
                     Caption = 'Description';
+                    ApplicationArea = All;
                 }
 
                 field(status; Rec.Status)
                 {
                     Caption = 'Status';
+                    ApplicationArea = All;
                 }
 
-                field(rentalType; Rec."Rental Type Code")
+                field(rentalTypeCode; Rec."Rental Type Code")
                 {
                     Caption = 'Rental Type';
+                    ApplicationArea = All;
                 }
             }
         }
     }
 }
+
