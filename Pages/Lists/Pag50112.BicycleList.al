@@ -50,4 +50,26 @@ page 50112 BicycleList
             }
         }
     }
+    actions
+    {
+        area(Processing)
+        {
+            action(ImportBicycles)
+            {
+                ApplicationArea = All;
+                Caption = 'Import Bicycles';
+                Image = Import;
+
+                trigger OnAction()
+                var
+                    InS: InStream;
+                    FileName: Text;
+                begin
+                    if UploadIntoStream('Izberi XML datoteko', '', 'XML Files (*.xml)|*.xml', FileName, InS) then begin
+                        XmlPort.Import(50110, InS);
+                    end;
+                end;
+            }
+        }
+    }
 }
